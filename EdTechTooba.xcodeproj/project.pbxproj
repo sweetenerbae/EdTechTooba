@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		84ECABD02E59D14000E489B9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 84ECABCF2E59D14000E489B9 /* FirebaseAuth */; };
+		84ECABD22E59D14000E489B9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 84ECABD12E59D14000E489B9 /* FirebaseCore */; };
+		84ECABD42E59D14000E489B9 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 84ECABD32E59D14000E489B9 /* FirebaseDatabase */; };
+		84ECABD62E59D14000E489B9 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 84ECABD52E59D14000E489B9 /* FirebaseFirestore */; };
+		84ECABD82E59D14000E489B9 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 84ECABD72E59D14000E489B9 /* FirebaseStorage */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		84FFA4AF2E59B70700E3C39D /* EdTechTooba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EdTechTooba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +31,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				84ECABD42E59D14000E489B9 /* FirebaseDatabase in Frameworks */,
+				84ECABD62E59D14000E489B9 /* FirebaseFirestore in Frameworks */,
+				84ECABD22E59D14000E489B9 /* FirebaseCore in Frameworks */,
+				84ECABD82E59D14000E489B9 /* FirebaseStorage in Frameworks */,
+				84ECABD02E59D14000E489B9 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +78,11 @@
 			);
 			name = EdTechTooba;
 			packageProductDependencies = (
+				84ECABCF2E59D14000E489B9 /* FirebaseAuth */,
+				84ECABD12E59D14000E489B9 /* FirebaseCore */,
+				84ECABD32E59D14000E489B9 /* FirebaseDatabase */,
+				84ECABD52E59D14000E489B9 /* FirebaseFirestore */,
+				84ECABD72E59D14000E489B9 /* FirebaseStorage */,
 			);
 			productName = EdTechTooba;
 			productReference = 84FFA4AF2E59B70700E3C39D /* EdTechTooba.app */;
@@ -94,6 +112,9 @@
 			);
 			mainGroup = 84FFA4A62E59B70700E3C39D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				84ECABCE2E59D14000E489B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 84FFA4B02E59B70700E3C39D /* Products */;
 			projectDirPath = "";
@@ -324,6 +345,45 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		84ECABCE2E59D14000E489B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		84ECABCF2E59D14000E489B9 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84ECABCE2E59D14000E489B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		84ECABD12E59D14000E489B9 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84ECABCE2E59D14000E489B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		84ECABD32E59D14000E489B9 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84ECABCE2E59D14000E489B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		84ECABD52E59D14000E489B9 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84ECABCE2E59D14000E489B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		84ECABD72E59D14000E489B9 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84ECABCE2E59D14000E489B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 84FFA4A72E59B70700E3C39D /* Project object */;
 }
