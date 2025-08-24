@@ -22,7 +22,7 @@ struct ProfileView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                Color("whiteAsset").ignoresSafeArea() // фон экрана — белый
+                Color("whiteAsset").ignoresSafeArea() 
 
                 if let user = currentUser {
                     ProfileLoggedInView(

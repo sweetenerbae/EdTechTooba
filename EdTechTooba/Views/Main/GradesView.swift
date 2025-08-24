@@ -20,18 +20,15 @@ struct GradesView: View {
                             subtitle: "Средние результаты за предметы",
                             emoji: "🏆"
                         )
-                        GradesListView(items: vm.filteredItems)
                     } else {
                         HeaderTitle(
                             title: "Пропуски",
                             subtitle: "Информация по пропущенным урокам",
                             emoji: "🫠"
                         )
-                        AbsencesView()
                     }
 
-
-                    // Segmented
+                    // Segmented — сразу после хедера
                     Picker("", selection: $vm.selectedTab) {
                         Text("Оценки").tag(GradesViewModel.Tab.grades)
                         Text("Пропуски").tag(GradesViewModel.Tab.skips)
@@ -39,7 +36,7 @@ struct GradesView: View {
                     .pickerStyle(.segmented)
                     .padding(.horizontal, 16)
 
-                    // ✅ без рекурсии:
+                    // Контент — уже ниже
                     if vm.selectedTab == .grades {
                         GradesListView(items: vm.filteredItems)
                     } else {

@@ -9,14 +9,16 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject private var usersVM = UsersViewModel()
+    @StateObject private var vm = StudyViewModel()
     private let syncService = FirebaseSyncService()
     
     var body: some View {
         TabView {
-            MainView()
+            MainView(onScheduleTap: {}, onAddNoteTap: {}
+            )
                 .tabItem { Label("Дневник", systemImage: "book.closed") }
             
-            Text("Учёба")
+            StudyView(vm: vm)
                 .tabItem { Label("Учёба", systemImage: "graduationcap") }
             
             ProfileView(usersVM: usersVM)

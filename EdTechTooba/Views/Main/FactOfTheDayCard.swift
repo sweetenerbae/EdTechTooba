@@ -1,150 +1,140 @@
-//
-//  FactOfTheDay.swift
-//  EdTechTooba
-//
-//  Created by Diana Kuchaeva on 24.08.25.
-//
-//import SwiftUI
-//
-//struct FactOfDayCard: View {
-//    var body: some View {
-//        HStack(spacing: 12) {
-//            RoundedRectangle(cornerRadius: 12)
-//                .fill(.ultraThinMaterial)
-//                .frame(width: 56, height: 56)
-//                .overlay(
-//                    Image(systemName: "photo")
-//                        .font(.title3)
-//                        .foregroundStyle(.secondary)
-//                )
-//
-//            VStack(alignment: .leading, spacing: 2) {
-//                HStack(spacing: 6) {
-//                    Image(systemName: "lightbulb.fill").foregroundStyle(Color.redAsset)
-//                    Text("Факт дня").font(.subheadline.bold())
-//                    Spacer()
-//                }
-//                Text("Пётр I никогда не ел шоколад")
-//                    .font(.subheadline)
-//                    .foregroundStyle(.secondary)
-//            }
-//        }
-//        .padding(14)
-//        .background(
-//            ZStack {
-//                Color.cardGray
-//                Image("Curve")
-//                    .offset(x: 90, y: 10)
-//            }
-//        )
-//        .clipShape(RoundedRectangle(cornerRadius: 16))
-//    }
-//}
-//
-//#Preview {
-//    FactOfDayCard()
-//}
-//import SwiftUI
-//
-//struct FactOfTheDayCard: View {
-//    var body: some View {
-//        HStack(alignment: .top, spacing: 16) {
-//            Image("FactCard")
-//                .resizable()
-//                .scaledToFill()
-//                .frame(width: 64, height: 85)
-//                .clipShape(RoundedRectangle(cornerRadius: 9))
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 9)
-//                        .stroke(Color.primaryRed, lineWidth: 6)
-//                )
-//                .overlay(
-//                    RoundedRectangle(cornerRadius: 9)
-//                        .stroke(Color("whiteAsset"), lineWidth: 2)
-//                )
-//
-//            VStack(alignment: .leading, spacing: 5) {
-//                Image(systemName: "lightbulb.fill")
-//                    .foregroundColor(.primaryRed)
-//                    .font(.system(size: 20))
-//
-//                VStack(alignment: .leading, spacing: 4) {
-//                    Text("Факт дня")
-//                        .font(.system(size: 14, weight: .semibold))
-//                    Text("Пётр I никогда не ел шоколад")
-//                        .font(.system(size: 12))
-//                        .fixedSize(horizontal: false, vertical: true)
-//                }
-//            }
-//        }
-//        .padding(14)
-//        .frame(maxWidth: .infinity)
-//        .background(
-//              ZStack {
-//                  Color.cardGray
-//                  Image("Curve")
-//                      .offset(x: 90, y: 10)
-//              }
-//          )
-//          .clipShape(RoundedRectangle(cornerRadius: 16))
-//          .cornerRadius(16)
-//        .padding(.horizontal, 20)
-//    }
-//}
-//
-//#Preview {
-//    FactOfTheDayCard()
-//}
 import SwiftUI
 
 struct FactOfTheDayCard: View {
     var body: some View {
-        HStack(alignment: .top, spacing: 12) {        // расстояние между картинкой и текстовым блоком = 12
-            Image("FactCard")
-                .resizable()
-                .scaledToFill()
-                .frame(width: 64, height: 85)
-                .clipShape(RoundedRectangle(cornerRadius: 9))
-                .overlay(
-                    RoundedRectangle(cornerRadius: 9)
-                        .stroke(Color.primaryRed, lineWidth: 6)
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 9)
-                        .stroke(Color("whiteAsset"), lineWidth: 2)
-                )
+        NavigationLink {
+            FactDetailView(
+                imageName: "FactCard",
+                title: "Факт дня – Операции во время эпохи Возрождения",
+                subtitle: "Врачи эпохи Возрождения начали делать пластические операции"
+            )
+        } label: {
+            HStack(alignment: .top, spacing: 12) {
+                Image("FactCard")
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: 64, height: 85)
+                    .clipShape(RoundedRectangle(cornerRadius: 9))
+                    .overlay(RoundedRectangle(cornerRadius: 9).stroke(Color.primaryRed, lineWidth: 6))
+                    .overlay(RoundedRectangle(cornerRadius: 9).stroke(Color("whiteAsset"), lineWidth: 2))
 
-            VStack(alignment: .leading, spacing: 5) {
-                Image(systemName: "lightbulb.fill")
-                    .foregroundColor(.primaryRed)
-                    .font(.system(size: 20))
+                VStack(alignment: .leading, spacing: 5) {
+                    Image(systemName: "lightbulb.fill")
+                        .foregroundColor(.primaryRed)
+                        .font(.system(size: 20))
 
-                VStack(alignment: .leading, spacing: 4) {
-                    Text("Факт дня")
-                        .font(.system(size: 14, weight: .semibold))
-                    Text("Пётр I никогда не ел шоколад")
-                        .font(.system(size: 12))
-                        .fixedSize(horizontal: false, vertical: true)
+                    VStack(alignment: .leading, spacing: 4) {
+                        Text("Факт дня")
+                            .font(.system(size: 14, weight: .semibold))
+                        Text("Пётр I никогда не ел шоколад")
+                            .font(.system(size: 12))
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
                 }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
-            .frame(maxWidth: .infinity, alignment: .leading) // растягиваем блок факта
+            .padding(.vertical, 20)
+            .padding(.horizontal, 16)
+            .background(
+                ZStack {
+                    Color.cardGray
+                    Image("Curve")
+                        .offset(x: 90, y: 10)
+                }
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 16))
         }
-        .padding(.vertical, 20)
-        .padding(.leading, 16)   // отступ слева у картинки
-        .padding(.trailing, 16)  // отступ справа у блока факта
-        .cornerRadius(16)
-        .padding(.horizontal, 20)
-        .background(
-              ZStack {
-                  Color.cardGray
-                  Image("Curve")
-                      .offset(x: 90, y: 10)
-              }
-          )
-          .clipShape(RoundedRectangle(cornerRadius: 16))
+        .buttonStyle(.plain)
     }
 }
 
 #Preview {
-    FactOfTheDayCard()
+    NavigationStack {
+        FactOfTheDayCard()
+            .padding(.top, 24)
+    }
+}
+
+import SwiftUI
+
+struct FactDetailView: View {
+    let imageName: String
+    let title: String
+    let subtitle: String
+    @Environment(\.dismiss) private var dismiss
+
+    var body: some View {
+        ZStack {
+            Image(imageName)
+                .resizable()
+                .scaledToFill()
+                .ignoresSafeArea()
+
+            LinearGradient(
+                colors: [.clear, .black.opacity(0.65)],
+                startPoint: .center,
+                endPoint: .bottom
+            )
+            .blur(radius: 6)
+            .ignoresSafeArea()
+        }
+        .navigationTitle("Факт дня")
+        .navigationBarTitleDisplayMode(.inline)
+        .toolbar {
+            ToolbarItem(placement: .topBarTrailing) {
+                Image(systemName: "bell.fill")
+                    .foregroundStyle(.white)
+            }
+        }
+        .safeAreaInset(edge: .bottom) {
+            VStack(alignment: .leading, spacing: 12) {
+                Text(title)
+                    .font(.title2.bold())
+                    .foregroundStyle(.white)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text(subtitle)
+                    .foregroundStyle(.white.opacity(0.9))
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(nil)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Button {
+                    dismiss()
+                } label: {
+                    Text("Буду знать")
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.white)
+                        .foregroundStyle(Color.primaryRed)
+                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                }
+                .padding(.top, 8)
+            }
+            .padding(.horizontal, 16)
+            .padding(.top, 12)
+            .padding(.bottom, 20) //
+            .background(
+                LinearGradient(
+                    colors: [.black.opacity(0.25), .black.opacity(0.6)],
+                    startPoint: .top, endPoint: .bottom
+                )
+                .blur(radius: 6)
+                .ignoresSafeArea(edges: .bottom)
+            )
+        }
+    }
+}
+
+#Preview {
+    NavigationStack {
+        FactDetailView(
+            imageName: "FactCard",
+            title: "Врачи эпохи Возрождения начали делать пластические операции",
+            subtitle: "Первые реконструктивные методики появились в Европе в XV–XVI веках."
+        )
+    }
 }

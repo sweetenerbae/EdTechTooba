@@ -14,6 +14,11 @@ struct MainView: View {
     @State private var selectedWeekday: Int = Calendar.current.component(.weekday, from: .now)
     @State private var selectedDay: Int = Calendar.current.component(.day, from: .now)
     @State private var showGrades = false
+    @State private var wd = 4  // текущий день недели
+    @State private var d  = 14 // выбранное число
+    var onScheduleTap: () -> Void
+    var onAddNoteTap: () -> Void
+    
 
     var body: some View {
         NavigationStack {
@@ -33,11 +38,12 @@ struct MainView: View {
 
                     // Календарь занятий
                     LessonsCalendarCard(
-                        selectedWeekday: $selectedWeekday,
-                        selectedDay: $selectedDay,
-                        onScheduleTap: {},
-                        onAddNoteTap: {}
+                        selectedWeekday: $wd,
+                        selectedDay: $d,
+                        onScheduleTap: { /* открыть расписание */ },
+                        onAddNoteTap: { /* показать добавление записи */ }
                     )
+                    .padding(.horizontal, 16)
 
                     // Учебные материалы (горизонтальная карусель)
                     MaterialsCarousel()
@@ -81,102 +87,123 @@ private struct TitleHero: View {
 }
 
 
-// MARK: - Lessons calendar
+// MARK: - Пример использования под «Календарь занятий»
 private struct LessonsCalendarCard: View {
     @Binding var selectedWeekday: Int
     @Binding var selectedDay: Int
+    
     var onScheduleTap: () -> Void
     var onAddNoteTap: () -> Void
 
     private let week = ["Пн","Вт","Ср","Чт","Пт","Сб","Вс"]
     private let days = [11,12,13,14,15,16,17]
+    private let dayToWeekday: [Int:Int] = [11:1, 12:2, 13:3, 14:4, 15:5, 16:6, 17:7]
 
     var body: some View {
-        VStack(spacing: 12) {
-            header
+        SectionCard(
+            title: "Календарь занятий",
+            subtitle: "Через 2 дня выходной день",
+            trailingIcon: "🗓"
+        ) {
+            VStack(spacing: 12) {
+                // Срок/статус
+                Text("Сегодня 3 урока")
+                    .font(.footnote.weight(.semibold))
+                    .foregroundStyle(Color.redAsset)
 
-            // Дни недели
-            HStack(spacing: 8) {
-                ForEach(0..<week.count, id: \.self) { i in
-                    let idx = i + 1
-                    WeekdayCell(
-                        title: week[i],
-                        isSelected: idx == selectedWeekday
+                // ДНИ НЕДЕЛИ
+                HStack(spacing: 12) {
+                    ForEach(0..<week.count, id: \.self) { i in
+                        let idx = i + 1
+                        pill(
+                            title: week[i],
+                            isSelected: idx == selectedWeekday
+                        )
+                        .onTapGesture {
+                            selectedWeekday = idx
+                            if let d = days.first(where: { dayToWeekday[$0] == idx }) {
+                                selectedDay = d
+                            }
+                        }
+                    }
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
+                .background(RoundedRectangle(cornerRadius: 18).fill(Color.cardGray))
+
+                // ЧИСЛА
+                HStack(spacing: 12) {
+                    ForEach(days, id: \.self) { d in
+                        pill(
+                            title: String(d),
+                            isSelected: d == selectedDay
+                        )
+                        .onTapGesture { selectedDay = d
+                            if let wd = dayToWeekday[d] {
+                                selectedWeekday = wd
+                            }
+                        }
+                    }
+                }
+                .padding(.horizontal, 8)
+                .padding(.vertical, 6)
+                .background(RoundedRectangle(cornerRadius: 18).fill(Color.cardGray))
+
+                // КРАСНАЯ кнопка
+                Button(action: onScheduleTap) {
+                    HStack {
+                        Text("Посмотреть расписание")
+                        Spacer()
+                        Image(systemName: "chevron.right")
+                    }
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundStyle(Color("whiteAsset"))
+                    .padding(.horizontal, 16)
+                    .frame(height: 56)
+                    .background(Color.redAsset)
+                    .clipShape(RoundedRectangle(cornerRadius: 22, style: .continuous))
+                }
+
+                // БЕЛАЯ кнопка
+                Button(action: onAddNoteTap) {
+                    HStack(spacing: 10) {
+                        Image(systemName: "pencil")
+                            .foregroundStyle(.secondary)
+                        Text("Добавить запись")
+                            .foregroundStyle(Color.labelBlack)
+                        Spacer()
+                    }
+                    .padding(.horizontal, 16)
+                    .frame(height: 56)
+                    .background(
+                        RoundedRectangle(cornerRadius: 22, style: .continuous)
+                            .fill(Color("whiteAsset"))
                     )
-                    .onTapGesture { selectedWeekday = idx }
                 }
             }
+        } footer: {
+            EmptyView()
+        }
+    }
 
-            // Числа
-            HStack(spacing: 8) {
-                ForEach(days, id: \.self) { day in
-                    DayCell(
-                        day: day,
-                        isSelected: day == selectedDay
-                    )
-                    .onTapGesture { selectedDay = day }
-                }
-            }
-
-            primaryButton(
-                title: "Посмотреть расписание",
-                action: onScheduleTap
+    // MARK: - Пилюля дня/числа
+    @ViewBuilder
+    private func pill(title: String, isSelected: Bool) -> some View {
+        let corner: CGFloat = 14
+        Text(title)
+            .font(.headline.weight(.semibold))
+            .foregroundStyle(isSelected ? Color.redAsset : .secondary)
+            .frame(maxWidth: .infinity)
+            .padding(.vertical, 12)
+            .background(isSelected ? Color("whiteAsset") : Color.cardGray)
+            .clipShape(RoundedRectangle(cornerRadius: corner, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: corner, style: .continuous)
+                    .stroke(isSelected ? Color.redAsset : .clear, lineWidth: 2)
             )
-
-            secondaryButton(
-                title: "Добавить запись",
-                systemImage: "pencil",
-                action: onAddNoteTap
-            )
-        }
-        .padding(14)
-        .background(Color("whiteAsset"))
-        .clipShape(RoundedRectangle(cornerRadius: 16))
-    }
-
-    // MARK: - Subviews
-
-    private var header: some View {
-        HStack {
-            Text("Сегодня 3 урока")
-                .font(.caption)
-                .foregroundStyle(.redAsset)
-            Spacer()
-            Image(systemName: "photo.on.rectangle")
-                .foregroundStyle(.secondary)
-        }
-    }
-
-    private func primaryButton(title: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            HStack {
-                Text(title)
-                Spacer()
-                Image(systemName: "chevron.right")
-            }
-            .font(.subheadline.weight(.semibold))
-            .padding(.vertical, 14)
-            .padding(.horizontal, 14)
-            .foregroundStyle(Color("whiteAsset"))
-            .background(Color.redAsset)
-            .clipShape(RoundedRectangle(cornerRadius: 12))
-        }
-    }
-
-    private func secondaryButton(title: String, systemImage: String, action: @escaping () -> Void) -> some View {
-        Button(action: action) {
-            Label(title, systemImage: systemImage)
-                .font(.subheadline.weight(.semibold))
-                .frame(maxWidth: .infinity)
-                .padding(.vertical, 12)
-                .foregroundStyle(Color.labelBlack)
-                .background(Color("whiteAsset"))
-                .clipShape(RoundedRectangle(cornerRadius: 12))
-        }
     }
 }
 
-// MARK: - Cells
 
 private struct WeekdayCell: View {
     let title: String
@@ -233,9 +260,9 @@ private struct MaterialsCarousel: View {
     }
 
     private let items: [Item] = [
-        .init(title: "История",      topics: 36, image: "books.vertical"),
-        .init(title: "Математика+",  topics: 20, image: "function"),
-        .init(title: "Русский язык", topics: 52, image: "character.book.closed")
+        .init(title: "История",      topics: 36, image: "History"),
+        .init(title: "Математика+",  topics: 20, image: "Math"),
+        .init(title: "Русский язык", topics: 52, image: "Russian")
     ]
 
     var body: some View {
@@ -261,12 +288,11 @@ private struct MaterialsCarousel: View {
                     ForEach(items) { item in
                         VStack(alignment: .leading, spacing: 8) {
                             RoundedRectangle(cornerRadius: 12)
-                                .fill(Color.cardGray)
                                 .frame(height: 110)
                                 .overlay(
-                                    Image(systemName: item.image)
-                                        .font(.largeTitle)
-                                        .foregroundStyle(.secondary)
+                                    Image(item.image)
+                                        .resizable()
+                                        .scaledToFit()
                                 )
 
                             Text(item.title)
@@ -279,7 +305,6 @@ private struct MaterialsCarousel: View {
                         }
                         .padding(12)
                         .frame(width: 160)
-                        .background(Color.white)
                         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                     }
                 }
@@ -431,55 +456,55 @@ private struct OCRCard: View {
     }
 }
 
-// MARK: - SectionCard (универсальная «коробка»)
-
+// MARK: - Универсальная серая карточка
 private struct SectionCard<Content: View, Footer: View>: View {
     let title: String
     let subtitle: String?
     let trailingIcon: String?
-    @ViewBuilder let content: Content
-    @ViewBuilder let footer: Footer
+    let content: () -> Content
+    let footer: () -> Footer
 
-    init(title: String,
-         subtitle: String? = nil,
-         trailingIcon: String? = nil,
-         @ViewBuilder content: () -> Content,
-         @ViewBuilder footer: () -> Footer) {
+    init(
+        title: String,
+        subtitle: String? = nil,
+        trailingIcon: String? = nil,
+        @ViewBuilder content: @escaping () -> Content,
+        @ViewBuilder footer: @escaping () -> Footer
+    ) {
         self.title = title
         self.subtitle = subtitle
         self.trailingIcon = trailingIcon
-        self.content = content()
-        self.footer = footer()
+        self.content = content
+        self.footer = footer
     }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 12) {
+        VStack(alignment: .leading, spacing: 14) {
             HStack(alignment: .top) {
-                VStack(alignment: .leading, spacing: 2) {
+                VStack(alignment: .leading, spacing: 4) {
                     Text(title)
                         .font(.system(size: 20, weight: .bold))
-
                     if let subtitle {
                         Text(subtitle)
-                            .font(.system(size: 16, weight: .regular))
+                            .font(.system(size: 16))
+                            .foregroundStyle(.secondary)
                     }
                 }
                 Spacer()
                 if let trailingIcon {
-                    Text(trailingIcon).font(.system(size: 51, weight: .bold))
+                    Text(trailingIcon)
+                        .font(.system(size: 48, weight: .bold))
                 }
             }
 
-            content
+            content()
 
-            footer
+            footer()
         }
-        .padding(14)
+        .padding(16)
         .background(Color.cardGray)
-        .clipShape(RoundedRectangle(cornerRadius: 16))
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }
 }
 
-#Preview {
-    MainView()
-}
+
