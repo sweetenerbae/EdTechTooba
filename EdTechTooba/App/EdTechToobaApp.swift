@@ -13,12 +13,8 @@ struct EdTechToobaApp: App {
     let persistenceController = PersistenceController.shared
 
     init() {
-        let seeder = SeedService(container: persistenceController.container)
-        seeder.seedIfNeeded()
         FirebaseApp.configure()
     }
-
-
 
     var body: some Scene {
         WindowGroup {
