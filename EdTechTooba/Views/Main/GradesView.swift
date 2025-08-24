@@ -28,7 +28,6 @@ struct GradesView: View {
                         )
                     }
 
-                    // Segmented — сразу после хедера
                     Picker("", selection: $vm.selectedTab) {
                         Text("Оценки").tag(GradesViewModel.Tab.grades)
                         Text("Пропуски").tag(GradesViewModel.Tab.skips)
@@ -36,7 +35,6 @@ struct GradesView: View {
                     .pickerStyle(.segmented)
                     .padding(.horizontal, 16)
 
-                    // Контент — уже ниже
                     if vm.selectedTab == .grades {
                         GradesListView(items: vm.filteredItems)
                     } else {

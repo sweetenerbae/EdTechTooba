@@ -336,19 +336,22 @@ private struct HomeworkCard: View {
                 HomeworkRow(text: "🌎 ", title: "География — 6 упражнений")
             }
         } footer: {
-            Button(action: onAllTap) {
+            NavigationLink {
+                HomeworkView()
+            } label: {
                 HStack {
                     Text("Посмотреть все задания")
                     Spacer()
                     Image(systemName: "chevron.right")
                 }
                 .font(.subheadline.weight(.semibold))
-                .padding(.vertical, 16)
+                .padding(.vertical, 16  )
                 .padding(.horizontal, 14)
                 .foregroundStyle(Color("whiteAsset"))
                 .background(Color.redAsset)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
+
         }
     }
 }
