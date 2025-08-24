@@ -14,22 +14,20 @@ struct SearchRow: View {
             HStack(spacing: 8) {
                 Image(systemName: "magnifyingglass")
                 TextField("Поиск", text: $searchText)
-                    .foregroundStyle(Color.backgroundGray)
+                    .foregroundStyle(.white)
             }
             .padding(.vertical, 12)
             .padding(.horizontal, 12)
             .background(Color.cardGray)
             .clipShape(RoundedRectangle(cornerRadius: 8))
-            .overlay(RoundedRectangle(cornerRadius: 8))
 
             Button {
                 // bookmarks / избранное
             } label: {
-                Image(systemName: "bookmark")
+                Image(systemName: "bell.fill")
                     .frame(width: 44, height: 44)
-                    .background(Color.white)
+                    .foregroundStyle(Color.redAsset)
                     .clipShape(RoundedRectangle(cornerRadius: 14))
-                    .overlay(RoundedRectangle(cornerRadius: 14))
             }
         }
     }

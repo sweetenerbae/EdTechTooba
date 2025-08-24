@@ -9,7 +9,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>ru.dianakuchaeva.edtechtooba</string>
+	<string>ru.dianakuchaeva.EdTechTooba</string>
 	<key>PROJECT_ID</key>
 	<string>todoappem</string>
 	<key>STORAGE_BUCKET</key>
@@ -25,6 +25,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:370535551527:ios:c1c7bce595bdff8a85f402</string>
+	<string>1:370535551527:ios:f80ff76622deed0885f402</string>
 </dict>
 </plist>
