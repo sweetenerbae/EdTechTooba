@@ -37,7 +37,7 @@ struct ProfileView: View {
         }
     }
 
-    /// Заглушка: «войти» — привязать первого пользователя к `AppStorage`
+    // Заглушка войти  привязать первого пользователя к `AppStorage`
     private func demoSignIn() {
         if let first = usersVM.users.first, let fid = first.firebaseId {
             currentFirebaseId = fid
@@ -56,7 +56,6 @@ struct ProfileView: View {
             currentFirebaseId = "demo123"
         }
     }
-
     
     private struct ProfileLoggedOutView: View {
         let onSignIn: () -> Void
@@ -64,7 +63,6 @@ struct ProfileView: View {
         var body: some View {
             ScrollView {
                 VStack(spacing: 16) {
-                    // Заголовок
                     VStack(alignment: .leading, spacing: 8) {
                         Text("Войдите в профиль")
                             .font(.title).bold()
@@ -73,16 +71,15 @@ struct ProfileView: View {
                     }
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .padding(20)
-                    .background(.white)
+                    .background(Color("whiteAsset"))
                     .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .shadow(color: .black.opacity(0.08), radius: 10, y: 4)
 
                     Button(action: onSignIn) {
                         Text("Войти")
                             .fontWeight(.semibold)
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 14)
-                            .background(Color(red: 0.95, green: 0.22, blue: 0.30)) // малиново-красная из макета
+                            .background(Color.primaryRed)
                             .foregroundStyle(.white)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                     }
@@ -150,9 +147,8 @@ struct ProfileView: View {
                 }
             }
             .padding(16)
-            .background(.white)
+            .background(Color.cardGray)
             .clipShape(RoundedRectangle(cornerRadius: 16))
-            .shadow(color: .black.opacity(0.08), radius: 10, y: 4)
         }
     }
 
@@ -201,7 +197,7 @@ struct ProfileView: View {
                             .font(.title3)
                             .frame(width: 28, height: 28)
                             .padding(10)
-                            .background(Color.white)
+                            .background(Color.cardGray)
                             .clipShape(RoundedRectangle(cornerRadius: 12))
                             .overlay(RoundedRectangle(cornerRadius: 12).stroke(Color.gray.opacity(0.15)))
 
@@ -212,9 +208,8 @@ struct ProfileView: View {
                         Spacer(minLength: 0)
                     }
                     .padding(12)
-                    .background(.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                    .shadow(color: .black.opacity(0.06), radius: 8, y: 3)
+                    .background(Color.cardGray)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
                 }
             }
         }
@@ -268,13 +263,12 @@ struct ProfileView: View {
                         .padding(.horizontal, 12)
 
                         if idx < rows.count - 1 {
-                            Divider().padding(.leading, 48)
+                            Divider()
                         }
                     }
                 }
-                .background(.white)
+                .background(Color("whiteAsset"))
                 .clipShape(RoundedRectangle(cornerRadius: 16))
-                .shadow(color: .black.opacity(0.06), radius: 8, y: 3)
             }
             .padding(.top, 4)
         }
@@ -294,8 +288,8 @@ struct ProfileView: View {
     user.role = "student"
     user.profilePageURL = nil
     user.firebaseId = "demo123"
-
+    
     vm.users = [user]
-
+    
     return ProfileView(usersVM: vm)
 }

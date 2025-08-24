@@ -13,8 +13,8 @@ struct ContentView: View {
 
     var body: some View {
         TabView {
-            Text("Дневник")
-                .tabItem { Label("Дневник", systemImage: "book.closed") }
+            MainView()
+            .tabItem { Label("Дневник", systemImage: "book.closed") }
 
             Text("Учёба")
                 .tabItem { Label("Учёба", systemImage: "graduationcap") }

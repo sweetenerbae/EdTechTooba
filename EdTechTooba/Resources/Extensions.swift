@@ -49,5 +49,6 @@ extension Color {
     static let primaryRed = Color("redAsset")
     static let backgroundGray = Color("grayAsset")
     static let labelBlack = Color("blackAsset")
+    static let cardGray = Color("grayCardAsset")
     
 }
