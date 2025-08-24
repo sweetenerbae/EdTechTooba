@@ -10,7 +10,6 @@ struct AskSection: View {
     var body: some View {
         VStack(spacing: 0) {
             Divider()
-                .padding(.horizontal, 16)
 
             ZStack(alignment: .top) {
                 Group {
@@ -104,7 +103,7 @@ struct AskAnythingCard: View {
                 Button(action: onSearchTap) {
                     Image(systemName: "magnifyingglass")
                         .font(.system(size: 14, weight: .bold))
-                        .foregroundStyle(.white)
+                        .foregroundStyle(Color("whiteAsset"))
                         .frame(width: 36, height: 36)
                         .background(Circle().fill(Color.labelBlack))
                 }
@@ -113,7 +112,7 @@ struct AskAnythingCard: View {
         .padding(20)
         .background(
             RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(Color.white)
+                .fill(Color("whiteAsset"))
         )
         .padding(.top, 12)
     }

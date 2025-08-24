@@ -21,7 +21,7 @@ struct MainView: View {
                 VStack(spacing: 20) {
                     // Поиск + закладки
                     SearchRow(searchText: $searchText)
-                    
+
                     // «Спросите что-нибудь»
                     AskSection(questionText: $questionText)
 
@@ -29,7 +29,7 @@ struct MainView: View {
                     TitleHero()
 
                     // Факт дня
-                    FactOfDayCard()
+                    FactOfTheDayCard()
 
                     // Календарь занятий
                     LessonsCalendarCard(
@@ -46,7 +46,7 @@ struct MainView: View {
                     HomeworkCard(onAllTap: {})
 
                     // Оценки
-                    GradesCard(onAllTap: {})
+                    GradesCard(onAllTap: {showGrades = true})
 
                     // Цифровизация лекций
                     OCRCard(onCapture: {})
@@ -54,6 +54,9 @@ struct MainView: View {
                 .padding(.horizontal, 16)
                 .padding(.top, 8)
                 .padding(.bottom, 24)
+                .navigationDestination(isPresented: $showGrades) {
+                         GradesView()
+                     }
             }
             .background(Color("whiteAsset").ignoresSafeArea())
             .navigationTitle("Дневник")
@@ -373,9 +376,7 @@ private struct GradesCard: View {
                 }
             }
         } footer: {
-            NavigationLink {
-                GradesView()
-            } label: {
+            Button(action: onAllTap) {
                 HStack {
                     Text("Посмотреть все оценки")
                     Spacer()
@@ -388,8 +389,8 @@ private struct GradesCard: View {
                 .background(Color.redAsset)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
             }
+            .buttonStyle(.plain)
         }
-
     }
 }
 
@@ -404,11 +405,11 @@ private struct OCRCard: View {
             trailingIcon: "💻"
         ) {
             RoundedRectangle(cornerRadius: 14)
-                .fill(Color.cardGray)
+                .fill(Color("whiteAsset"))
                 .frame(height: 140)
                 .overlay(
                     VStack(spacing: 8) {
-                        Image(systemName: "camera.fill").font(.title)
+                        Image(systemName: "camera.fill").font(.title).foregroundStyle(Color.labelBlack)
                         Text("Добавьте фото").font(.footnote).foregroundStyle(.secondary)
                     }
                 )

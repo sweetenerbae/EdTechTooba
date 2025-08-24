@@ -1,5 +1,7 @@
 import SwiftUI
 
+// GradesView.swift
+
 struct GradesView: View {
     @StateObject var vm = GradesViewModel()
 
@@ -8,68 +10,111 @@ struct GradesView: View {
             ScrollView {
                 VStack(spacing: 16) {
 
-                    // Поиск + колокольчик (как на скрине)
-                    HStack(spacing: 12) {
-                        HStack {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundStyle(.secondary)
-                            TextField("Поиск", text: $vm.searchText)
-                        }
-                        .padding(.vertical, 12)
-                        .padding(.horizontal, 12)
-                        .background(Color.cardGray)
-                        .clipShape(RoundedRectangle(cornerRadius: 12))
+                    // Search + bell
+                    HeaderSearch(searchText: $vm.searchText)
 
-                        Button {
-                            // уведомления
-                        } label: {
-                            Image(systemName: "bell.fill")
-                                .frame(width: 44, height: 44)
-                                .background(Color.cardGray)
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
-                        }
+                    // Заголовок
+                    if vm.selectedTab == .grades {
+                        HeaderTitle(
+                            title: "Оценки",
+                            subtitle: "Средние результаты за предметы",
+                            emoji: "🏆"
+                        )
+                        GradesListView(items: vm.filteredItems)
+                    } else {
+                        HeaderTitle(
+                            title: "Пропуски",
+                            subtitle: "Информация по пропущенным урокам",
+                            emoji: "🫠"
+                        )
+                        AbsencesView()
                     }
-                    .padding(.horizontal, 16)
 
-                    // Заголовок + кубок
-                    HStack(alignment: .top) {
-                        VStack(alignment: .leading, spacing: 4) {
-                            Text("Оценки").font(.system(size: 28, weight: .heavy))
-                            Text("Средние результаты за предметы")
-                                .foregroundStyle(.secondary)
-                        }
-                        Spacer()
-                        Text("🏆").font(.system(size: 44))
-                    }
-                    .padding(.horizontal, 16)
 
-                    // Сегменты
+                    // Segmented
                     Picker("", selection: $vm.selectedTab) {
                         Text("Оценки").tag(GradesViewModel.Tab.grades)
                         Text("Пропуски").tag(GradesViewModel.Tab.skips)
                     }
                     .pickerStyle(.segmented)
                     .padding(.horizontal, 16)
-                    .background(
-                        RoundedRectangle(cornerRadius: 16).fill(Color.clear)
-                    )
 
-                    // Список предметов
-                    VStack(spacing: 12) {
-                        ForEach(vm.filteredItems) { item in
-                            GradeRow(item: item)
-                        }
+                    // ✅ без рекурсии:
+                    if vm.selectedTab == .grades {
+                        GradesListView(items: vm.filteredItems)
+                    } else {
+                        AbsencesView()
                     }
-                    .padding(.horizontal, 16)
                 }
                 .padding(.vertical, 12)
             }
             .background(Color("whiteAsset").ignoresSafeArea())
-            .navigationTitle("") // заголовок внутри
             .navigationBarTitleDisplayMode(.inline)
+            .hideKeyboardOnTap()
         }
     }
 }
+
+private struct GradesListView: View {
+    let items: [SubjectGrade]
+    var body: some View {
+        VStack(spacing: 12) {
+            ForEach(items) { item in
+                GradeRow(item: item)
+            }
+        }
+        .padding(.horizontal, 16)
+    }
+}
+
+// Вспомогательные заголовки вынеси для читабельности
+private struct HeaderSearch: View {
+    @Binding var searchText: String
+    var body: some View {
+        HStack(spacing: 12) {
+            HStack {
+                Image(systemName: "magnifyingglass").foregroundStyle(.secondary)
+                TextField("Поиск", text: $searchText)
+            }
+            .padding(.vertical, 12)
+            .padding(.horizontal, 12)
+            .background(Color.cardGray)
+            .clipShape(RoundedRectangle(cornerRadius: 12))
+
+            Button { } label: {
+                Image(systemName: "bell.fill")
+                    .frame(width: 44, height: 44)
+                    .foregroundStyle(Color.labelBlack)
+                    .background(Color.cardGray)
+                    .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+        }
+        .padding(.horizontal, 16)
+    }
+}
+
+struct HeaderTitle: View {
+    let title: String
+    let subtitle: String
+    let emoji: String
+
+    var body: some View {
+        HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(title)
+                    .font(.system(size: 28, weight: .heavy))
+                Text(subtitle)
+                    .foregroundStyle(.secondary)
+            }
+            Spacer()
+            Text(emoji)
+                .font(.system(size: 44))
+        }
+        .padding(.horizontal, 16)
+    }
+}
+
+
 
 private struct GradeRow: View {
     let item: SubjectGrade

@@ -45,3 +45,33 @@ final class GradesViewModel: ObservableObject {
         return items.filter { $0.title.localizedCaseInsensitiveContains(q) }
     }
 }
+
+final class AbsencesViewModel: ObservableObject {
+    @Published var items: [SubjectAbsence] = []
+
+    init() {
+        loadMock()
+    }
+
+    func loadMock() {
+        items = [
+            SubjectAbsence(
+                emoji: "🪆",
+                title: "Литература",
+                totalMissed: 3,
+                periods: [
+                    AbsencePeriod(
+                        range: "25 сентября – 25 декабря",
+                        periodName: "Аттестационный период 1",
+                        score: 4.4,
+                        missedMarks: [false,false,true,true,true,false,true,true,false] // пример
+                    )
+                ]
+            ),
+            SubjectAbsence(emoji: "🇷🇺", title: "Русский язык", totalMissed: 1, periods: []),
+            SubjectAbsence(emoji: "🧮", title: "Математика", totalMissed: 0, periods: []),
+            SubjectAbsence(emoji: "⚽️", title: "Физкультура", totalMissed: 0, periods: []),
+            SubjectAbsence(emoji: "🧓", title: "История", totalMissed: 0, periods: [])
+        ]
+    }
+}
