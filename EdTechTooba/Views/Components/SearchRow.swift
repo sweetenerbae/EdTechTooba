@@ -28,6 +28,6 @@ struct SearchRow: View {
                     .clipShape(RoundedRectangle(cornerRadius: 12))
             }
         }
-        .padding(.horizontal, 16)
+        .frame(maxWidth: .infinity)
     }
 }

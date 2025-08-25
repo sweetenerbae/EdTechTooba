@@ -4,7 +4,7 @@ struct FactOfTheDayCard: View {
     var body: some View {
         NavigationLink {
             FactDetailView(
-                imageName: "FactCard",
+                imageName: "FactCard2",
                 title: "Факт дня – Операции во время эпохи Возрождения",
                 subtitle: "Врачи эпохи Возрождения начали делать пластические операции"
             )
@@ -116,7 +116,7 @@ struct FactDetailView: View {
             }
             .padding(.horizontal, 16)
             .padding(.top, 12)
-            .padding(.bottom, 20) //
+            .padding(.bottom, 40) //
             .background(
                 LinearGradient(
                     colors: [.black.opacity(0.25), .black.opacity(0.6)],

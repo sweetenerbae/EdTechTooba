@@ -72,6 +72,7 @@ struct StudyView: View {
         }
         .background(Color("whiteAsset").ignoresSafeArea())
         .navigationTitle("Учёба")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

@@ -4,6 +4,7 @@ struct AskSection: View {
     @Binding var questionText: String
     var onTypeTap: () -> Void = {}
     var onSearchTap: () -> Void = {}
+    @State private var openChat = false
 
     @State private var cardHeight: CGFloat = 50
 
@@ -33,7 +34,7 @@ struct AskSection: View {
                 AskAnythingCard(
                     questionText: $questionText,
                     onTypeTap: onTypeTap,
-                    onSearchTap: onSearchTap
+                    onSearchTap: { openChat = true }
                 )
                 .padding(.horizontal, 16)
                 .background(
@@ -43,6 +44,10 @@ struct AskSection: View {
                     }
                 )
             }
+            NavigationLink("", isActive: $openChat) {
+                ChatView()
+            }
+            .hidden()
         }
         .onPreferenceChange(AskCardHeightKey.self) { cardHeight = $0 }
     }
@@ -81,7 +86,7 @@ struct AskAnythingCard: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
-            Text(questionText.isEmpty ? "Спросите что-нибудь" : questionText)
+            TextField("Спросите что‑нибудь", text: $questionText, axis: .vertical)
                 .font(.system(size: 16, weight: .medium))
                 .foregroundStyle(.secondary)
                 .lineLimit(2)

@@ -106,7 +106,7 @@ struct HomeworkSubjectCard: View {
                             coverImageName: "Kinematic",
                             ribbonText: "Оценка 5 за расписанное решение",
                             title: "Кинематика",
-                            body: "Четыре одинаковых кирпича массой 3 кг каждый сложены в стопку ...",
+                            body: "Четыре одинаковых кирпича массой 3 кг каждый сложены в стопку (см. рис.). На сколько увеличится сила N, действующая со стороны горизонтальной опоры на 1-⁠й кирпич, если сверху положить еще один такой же кирпич? Ответ выразите в ньютонах.",
                             solvedCount: 12, solvedTotal: 16,
                             correctCount: 10, correctTotal: 12
                         )
@@ -129,6 +129,38 @@ struct HomeworkSubjectCard: View {
             }
         }
         .padding(16)
+        .background(Color.cardGray)
+        .clipShape(RoundedRectangle(cornerRadius: 16))
+    }
+}
+
+// MARK: - Subviews
+
+struct StatTile: View {
+    let headline: String
+    let caption: String
+    let Icon: String
+    var accent: Color = .secondary
+
+    var body: some View {
+        HStack(spacing: 12) {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(headline)
+                    .font(.system(size: 20, weight: .bold))
+                Text(caption)
+                    .font(.system(size: 14, weight: .regular))
+            }
+            Spacer()
+            Text(Icon)
+                .font(.title2)
+                .frame(width: 33, height: 33)
+                .background(
+                    RoundedRectangle(cornerRadius: 12)
+                        .fill(Color("whiteAsset"))
+                )
+        }
+        .padding(16)
+        .frame(maxWidth: .infinity)
         .background(Color.cardGray)
         .clipShape(RoundedRectangle(cornerRadius: 16))
     }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		844B4F872E5C3C55009F10DD /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 844B4F862E5C3C55009F10DD /* FirebaseFunctions */; };
 		84ECABD02E59D14000E489B9 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 84ECABCF2E59D14000E489B9 /* FirebaseAuth */; };
 		84ECABD22E59D14000E489B9 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 84ECABD12E59D14000E489B9 /* FirebaseCore */; };
 		84ECABD42E59D14000E489B9 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 84ECABD32E59D14000E489B9 /* FirebaseDatabase */; };
@@ -18,9 +19,22 @@
 		84FFA4AF2E59B70700E3C39D /* EdTechTooba.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EdTechTooba.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		84A2080A2E5C255B0083A967 /* Exceptions for "EdTechTooba" folder in "EdTechTooba" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 84FFA4AE2E59B70700E3C39D /* EdTechTooba */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		84FFA4B12E59B70700E3C39D /* EdTechTooba */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				84A2080A2E5C255B0083A967 /* Exceptions for "EdTechTooba" folder in "EdTechTooba" target */,
+			);
 			path = EdTechTooba;
 			sourceTree = "<group>";
 		};
@@ -34,6 +48,7 @@
 				84ECABD42E59D14000E489B9 /* FirebaseDatabase in Frameworks */,
 				84ECABD62E59D14000E489B9 /* FirebaseFirestore in Frameworks */,
 				84ECABD22E59D14000E489B9 /* FirebaseCore in Frameworks */,
+				844B4F872E5C3C55009F10DD /* FirebaseFunctions in Frameworks */,
 				84ECABD82E59D14000E489B9 /* FirebaseStorage in Frameworks */,
 				84ECABD02E59D14000E489B9 /* FirebaseAuth in Frameworks */,
 			);
@@ -83,6 +98,7 @@
 				84ECABD32E59D14000E489B9 /* FirebaseDatabase */,
 				84ECABD52E59D14000E489B9 /* FirebaseFirestore */,
 				84ECABD72E59D14000E489B9 /* FirebaseStorage */,
+				844B4F862E5C3C55009F10DD /* FirebaseFunctions */,
 			);
 			productName = EdTechTooba;
 			productReference = 84FFA4AF2E59B70700E3C39D /* EdTechTooba.app */;
@@ -278,7 +294,11 @@
 				DEVELOPMENT_TEAM = KD8FYSFGJU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EdTechTooba/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Нужна камера для распознавания лекций";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Для сохранения фото в библиотеку";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -313,7 +333,11 @@
 				DEVELOPMENT_TEAM = KD8FYSFGJU;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = EdTechTooba/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.education";
+				INFOPLIST_KEY_NSCameraUsageDescription = "Нужна камера для распознавания лекций";
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "Для сохранения фото в библиотеку";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -373,6 +397,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		844B4F862E5C3C55009F10DD /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 84ECABCE2E59D14000E489B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
 		84ECABCF2E59D14000E489B9 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 84ECABCE2E59D14000E489B9 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
