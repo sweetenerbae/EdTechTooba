@@ -36,7 +36,6 @@ struct AskSection: View {
                     onTypeTap: onTypeTap,
                     onSearchTap: { openChat = true }
                 )
-                .padding(.horizontal, 16)
                 .background(
                     GeometryReader { proxy in
                         Color.clear

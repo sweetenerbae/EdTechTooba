@@ -43,7 +43,6 @@ struct MainView: View {
                         onScheduleTap: { /* открыть расписание */ },
                         onAddNoteTap: { /* показать добавление записи */ }
                     )
-                    .padding(.horizontal, 16)
 
                     // Учебные материалы (горизонтальная карусель)
                     MaterialsCarousel()
@@ -306,6 +305,7 @@ private struct GradesCard: View {
 // MARK: - OCR
 
 private struct OCRCard: View {
+    @State private var showCamera = false
     var onCapture: () -> Void
     var body: some View {
         SectionCard(
@@ -323,7 +323,7 @@ private struct OCRCard: View {
                     }
                 )
         } footer: {
-            Button(action: onCapture) {
+            Button(action: {showCamera = true} ) {
                 HStack {
                     Text("Сфотографировать")
                     Spacer()
@@ -335,6 +335,9 @@ private struct OCRCard: View {
                 .foregroundStyle(Color("whiteAsset"))
                 .background(Color.redAsset)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
+            }
+            .fullScreenCover(isPresented: $showCamera) {
+                OCRCameraView()
             }
         }
     }

@@ -4,8 +4,9 @@
 //
 //  Created by Diana Kuchaeva on 25.08.25.
 //
+import SwiftUI
 
-private struct LessonsCalendarCard: View {
+struct LessonsCalendarCard: View {
     @Binding var selectedWeekday: Int
     @Binding var selectedDay: Int
     
@@ -55,7 +56,8 @@ private struct LessonsCalendarCard: View {
                             title: String(d),
                             isSelected: d == selectedDay
                         )
-                        .onTapGesture { selectedDay = d
+                        .onTapGesture {
+                            selectedDay = d
                             if let wd = dayToWeekday[d] {
                                 selectedWeekday = wd
                             }
@@ -108,15 +110,77 @@ private struct LessonsCalendarCard: View {
     private func pill(title: String, isSelected: Bool) -> some View {
         let corner: CGFloat = 14
         Text(title)
-            .font(.headline.weight(.semibold))
-            .foregroundStyle(isSelected ? Color.redAsset : .secondary)
+            .font(.system(size: 15, weight: .semibold))
+            .foregroundStyle(isSelected ? Color("whiteAsset") : Color.labelBlack)
             .frame(maxWidth: .infinity)
-            .padding(.vertical, 12)
-            .background(isSelected ? Color("whiteAsset") : Color.cardGray)
-            .clipShape(RoundedRectangle(cornerRadius: corner, style: .continuous))
-            .overlay(
+            .padding(.vertical, 10)
+            .background(
                 RoundedRectangle(cornerRadius: corner, style: .continuous)
-                    .stroke(isSelected ? Color.redAsset : .clear, lineWidth: 2)
+                    .fill(isSelected ? Color.redAsset : Color.cardGray)
             )
     }
 }
+
+private struct SectionCard<Content: View, Footer: View>: View {
+    let title: String
+    let subtitle: String?
+    let trailingIcon: String?
+    @ViewBuilder let content: Content
+    @ViewBuilder let footer: Footer
+
+    init(
+        title: String,
+        subtitle: String? = nil,
+        trailingIcon: String? = nil,
+        @ViewBuilder content: () -> Content,
+        @ViewBuilder footer: () -> Footer
+    ) {
+        self.title = title
+        self.subtitle = subtitle
+        self.trailingIcon = trailingIcon
+        self.content = content()
+        self.footer = footer()
+    }
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 4) {
+                    Text(title)
+                        .font(.system(size: 20, weight: .bold))
+                    if let subtitle {
+                        Text(subtitle)
+                            .font(.system(size: 16, weight: .regular))
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                Spacer()
+                if let trailingIcon {
+                    Text(trailingIcon)
+                        .font(.system(size: 44, weight: .bold))
+                }
+            }
+
+            content
+            footer
+        }
+        .padding(14)
+        .background(Color.cardGray)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+    }
+}
+
+//  инициализатор без footer
+extension SectionCard where Footer == EmptyView {
+    init(
+        title: String,
+        subtitle: String? = nil,
+        trailingIcon: String? = nil,
+        @ViewBuilder content: () -> Content
+    ) {
+        self.init(title: title, subtitle: subtitle, trailingIcon: trailingIcon, content: content) {
+            EmptyView()
+        }
+    }
+}
+
