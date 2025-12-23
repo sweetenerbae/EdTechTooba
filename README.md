@@ -76,21 +76,35 @@ npm install
     <td><img width="553" height="897" alt="image" src="https://github.com/user-attachments/assets/1a10bce8-5706-4448-98d7-f04fec1e91d6" />
 </td>
   </tr>
+	
 <tr>
 	<td><img width="556" height="985" alt="image" src="https://github.com/user-attachments/assets/60b2dcbd-11d5-49d1-97c5-9cd3e3d84f25" />
 </td>
 	<td><img width="666" height="1350" alt="image" src="https://github.com/user-attachments/assets/7edb0785-75dd-4cc5-99f3-5e0d3d57eb7e" />
 </td>
-
 </tr>
+	
+<tr>
+	<td><img width="660" height="1367" alt="image" src="https://github.com/user-attachments/assets/19a6a141-312c-4f5d-973e-e0c953b773f5" /></td>
+	<td><img width="662" height="1367" alt="image" src="https://github.com/user-attachments/assets/168a4c44-50b2-4802-9b28-276526fc5da1" />
+</td>
+</tr>
+
+<tr>
+	<td><img width="662" height="1367" alt="image" src="https://github.com/user-attachments/assets/168a4c44-50b2-4802-9b28-276526fc5da1" /></td>
+	<td><img width="665" height="1367" alt="image" src="https://github.com/user-attachments/assets/a4a91daa-2d49-4fcc-9a5c-cc211672416f" /></td>
+</tr>
+
+<tr>
+	<td><img width="662" height="1349" alt="image" src="https://github.com/user-attachments/assets/22de96ef-a63b-45c4-89e8-22298cbf8ee6" />
+</td>
+	<td><img width="662" height="1362" alt="image" src="https://github.com/user-attachments/assets/d11daf17-d171-4a6e-9c7f-bf419759234b" /></td>
+</tr>
+    <img width="660" height="1351" alt="image" src="https://github.com/user-attachments/assets/1aace009-be20-43f1-a532-20511ebac51a" />
+
 </table>
 
-	<img width="660" height="1367" alt="image" src="https://github.com/user-attachments/assets/19a6a141-312c-4f5d-973e-e0c953b773f5" />
-	<img width="662" height="1367" alt="image" src="https://github.com/user-attachments/assets/168a4c44-50b2-4802-9b28-276526fc5da1" />
-	<img width="665" height="1367" alt="image" src="https://github.com/user-attachments/assets/a4a91daa-2d49-4fcc-9a5c-cc211672416f" />
-	<img width="662" height="1349" alt="image" src="https://github.com/user-attachments/assets/22de96ef-a63b-45c4-89e8-22298cbf8ee6" />
-	<img width="662" height="1362" alt="image" src="https://github.com/user-attachments/assets/d11daf17-d171-4a6e-9c7f-bf419759234b" />
-    <img width="660" height="1351" alt="image" src="https://github.com/user-attachments/assets/1aace009-be20-43f1-a532-20511ebac51a" />
+	
 
 
 
