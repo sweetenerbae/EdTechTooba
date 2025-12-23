@@ -18,7 +18,7 @@
 
 ### 1. Клонирование
 ```bash
-git clone https://github.com/<your-username>/EdTechTooba.git
+git clone https://github.com/sweetenerbae/EdTechTooba.git
 cd EdTechTooba
 ```
 2. Установка зависимостей
@@ -34,6 +34,8 @@ File → Packages → Update to Latest Package Versions
 	•	FirebaseFirestore
 	•	FirebaseStorage
 	•	FirebaseFunctions
+
+UPD: нет подключения к Firebase
 
 3. ### Firebase
 Проект уже подключен к Firebase.  
